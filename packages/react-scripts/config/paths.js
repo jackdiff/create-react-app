@@ -50,7 +50,7 @@ function getServedPath(appPackageJson) {
 module.exports = {
   dotenv: resolveApp('.env'),
   appPath: resolveApp('.'),
-  appBuild: resolveApp('public'),
+  appBuild: resolveApp('public/build'),
   appIndexJs: resolveApp('resources/assets/js/index.js'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('resources/assets/'),
@@ -68,7 +68,7 @@ const resolveOwn = relativePath => path.resolve(__dirname, '..', relativePath);
 module.exports = {
   dotenv: resolveApp('.env'),
   appPath: resolveApp('.'),
-  appBuild: resolveApp('public'),
+  appBuild: resolveApp('public/build'),
   appIndexJs: resolveApp('resources/assets/js/index.js'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('resources/assets/'),
