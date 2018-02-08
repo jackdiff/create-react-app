@@ -5,13 +5,22 @@
 
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
-const cp = require('child_process');
+process.env.NODE_ENV = 'development';
 
-const resolveOwn = relativePath => path.resolve(__dirname, '..', relativePath);
-// Now that we have packed them, call the global CLI.
-var webpack = "node_modules/webpack/bin/webpack.js"
-var webpackConfig = resolveOwn('config/webpack.config.dev.js');
-var command = "cross-env NODE_ENV=development "+ webpack + " --config " + webpackConfig + " --watch --progress --hide-modules";
-cp.execSync(command);
+const fs = require('fs-extra');
+const webpack = require('webpack');
+const paths = require('../config/paths');
+const config = require('../config/webpack.config.dev');
+
+// removes react-dev-utils/webpackHotDevClient.js at first in the array
+config.entry.shift();
+
+webpack(config).watch({}, (err, stats) => {
+  if (err) {
+    console.error(err);
+  }
+  console.error(stats.toString({
+    chunks: false,
+    colors: true
+  }));
+});
