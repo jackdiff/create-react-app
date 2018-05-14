@@ -18,6 +18,7 @@ const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 
 const envPublicUrl = process.env.PUBLIC_URL;
+const appConf = require(resolveApp('resources/assets/js/config/app.js'));
 
 function ensureSlash(path, needsSlash) {
   const hasSlash = path.endsWith('/');
@@ -59,6 +60,7 @@ module.exports = {
   appNodeModules: resolveApp('node_modules'),
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
+  langPath: resolveApp(path.join('resources/lang', appConf.lang)),
 };
 
 // @remove-on-eject-begin
@@ -80,6 +82,7 @@ module.exports = {
   // These properties only exist before ejecting:
   ownPath: resolveOwn('.'),
   ownNodeModules: resolveOwn('node_modules'), // This is empty on npm 3
+  langPath: resolveApp(path.join('resources/lang', appConf.lang)),
 };
 
 const ownPackageJson = require('../package.json');
@@ -110,6 +113,7 @@ if (
     // These properties only exist before ejecting:
     ownPath: resolveOwn('.'),
     ownNodeModules: resolveOwn('node_modules'),
+    langPath: resolveApp(path.join('resources/lang', appConf.lang)),
   };
 }
 // @remove-on-eject-end

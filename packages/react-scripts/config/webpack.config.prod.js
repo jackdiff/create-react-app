@@ -11,6 +11,7 @@
 const autoprefixer = require('autoprefixer');
 const path = require('path');
 const webpack = require('webpack');
+const I18nPlugin = require("i18n-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
@@ -35,7 +36,7 @@ const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 const publicUrl = publicPath.slice(0, -1);
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
-
+const language = require(paths.langPath);
 // Assert this just to be safe.
 // Development builds of React are slow and not intended for production.
 if (env.stringified['process.env'].NODE_ENV !== '"production"') {
@@ -135,6 +136,7 @@ module.exports = {
         use: [
           {
             options: {
+              emitWarning: true,
               formatter: eslintFormatter,
               eslintPath: require.resolve('eslint'),
               // @remove-on-eject-begin
@@ -299,6 +301,7 @@ module.exports = {
     new ExtractTextPlugin({
       filename: cssFilename,
     }),
+    new I18nPlugin(language),
     // Generate a manifest file which contains a mapping of all asset filenames
     // to their corresponding output file so that tools can pick it up without
     // having to parse `index.html`.
