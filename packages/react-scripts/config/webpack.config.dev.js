@@ -144,6 +144,9 @@ module.exports = {
               // @remove-on-eject-begin
               baseConfig: {
                 extends: [require.resolve('eslint-config-react-app')],
+                globals: {
+                  "__": true,
+                },
               },
               ignore: false,
               useEslintrc: false,

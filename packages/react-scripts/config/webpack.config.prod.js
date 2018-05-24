@@ -144,6 +144,9 @@ module.exports = {
               // e.g. to enable no-console and no-debugger only in production.
               baseConfig: {
                 extends: [require.resolve('eslint-config-react-app')],
+                globals: {
+                  "__": true,
+                },
               },
               ignore: false,
               useEslintrc: false,
