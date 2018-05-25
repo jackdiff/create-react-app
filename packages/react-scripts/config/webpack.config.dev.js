@@ -278,6 +278,7 @@ module.exports = {
     new webpack.DefinePlugin(env.stringified),
     new ExtractTextPlugin({
       filename: cssFilename,
+      allChunks: true,
     }),
     new I18nPlugin(language),
     // This is necessary to emit hot updates (currently CSS only):
