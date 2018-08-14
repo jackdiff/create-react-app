@@ -23,6 +23,8 @@ switch (script) {
   case 'eject':
   case 'start':
   case 'dev':
+  case 'devssr':
+  case 'buildssr':
   case 'test': {
     const result = spawn.sync(
       'node',
